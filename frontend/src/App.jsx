@@ -9,6 +9,7 @@ function App() {
     impacto: 'Bajo'
   })
   const [cargando, setCargando] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const manejarCambio = (e) => {
     setFormulario({
@@ -26,7 +27,7 @@ function App() {
 
     try {
       setCargando(true);
-      const respuesta = await axios.post('https://ecotracker-fullstack.onrender.com/nuevo-gasto', formulario)
+      const respuesta = await axios.post('${API_URL}/nuevo-gasto', formulario)
 
       setGastos([...gastos, respuesta.data.dato])
 
@@ -50,7 +51,7 @@ function App() {
     if (window.confirm('¿Estás seguro que deseas eliminar este gasto?')) {
       try {
         setCargando(true);
-        await axios.delete(`https://ecotracker-fullstack.onrender.com/eliminar-gasto/${id}`);
+        await axios.delete(`${API_URL}/eliminar-gasto/${id}`);
         const nuevaLista = gastos.filter(gasto => gasto._id !== id);
         setGastos(nuevaLista);
       } catch (error) {
@@ -69,7 +70,7 @@ function App() {
     const obtenerDatos = async () => {
       try {
         setCargando(true);
-        const respuesta = await axios.get('https://ecotracker-fullstack.onrender.com/ver-gastos')
+        const respuesta = await axios.get('${API_URL}/ver-gastos')
         setGastos(respuesta.data)
       } catch (error) {
         console.error("Error al pedir gastos:", error)

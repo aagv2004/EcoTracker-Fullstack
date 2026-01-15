@@ -6,7 +6,9 @@ import cors from 'cors';
 
 
 const app = express(); // Creamos una instancia de la aplicación
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.json());
 const PORT = 3000; // Definimos en qué "puerta" escuchará el servidor
 
