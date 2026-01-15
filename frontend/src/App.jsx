@@ -26,7 +26,7 @@ function App() {
 
     try {
       setCargando(true);
-      const respuesta = await axios.post('http://localhost:3000/nuevo-gasto', formulario)
+      const respuesta = await axios.post('https://ecotracker-fullstack.onrender.com/nuevo-gasto', formulario)
 
       setGastos([...gastos, respuesta.data.dato])
 
@@ -50,7 +50,7 @@ function App() {
     if (window.confirm('¿Estás seguro que deseas eliminar este gasto?')) {
       try {
         setCargando(true);
-        await axios.delete(`http://localhost:3000/eliminar-gasto/${id}`);
+        await axios.delete(`https://ecotracker-fullstack.onrender.com/eliminar-gasto/${id}`);
         const nuevaLista = gastos.filter(gasto => gasto._id !== id);
         setGastos(nuevaLista);
       } catch (error) {
@@ -69,7 +69,7 @@ function App() {
     const obtenerDatos = async () => {
       try {
         setCargando(true);
-        const respuesta = await axios.get('http://localhost:3000/ver-gastos')
+        const respuesta = await axios.get('https://ecotracker-fullstack.onrender.com/ver-gastos')
         setGastos(respuesta.data)
       } catch (error) {
         console.error("Error al pedir gastos:", error)
