@@ -27,7 +27,7 @@ function App() {
 
     try {
       setCargando(true);
-      const respuesta = await axios.post('${API_URL}/nuevo-gasto', formulario)
+      const respuesta = await axios.post(`${API_URL}/nuevo-gasto`, formulario)
 
       setGastos([...gastos, respuesta.data.dato])
 
@@ -70,7 +70,7 @@ function App() {
     const obtenerDatos = async () => {
       try {
         setCargando(true);
-        const respuesta = await axios.get('${API_URL}/ver-gastos')
+        const respuesta = await axios.get(`${API_URL}/ver-gastos`)
         setGastos(respuesta.data)
       } catch (error) {
         console.error("Error al pedir gastos:", error)
@@ -79,7 +79,7 @@ function App() {
       }
     }
     obtenerDatos()
-  }, [])
+  }, [API_URL])
 
   return (
     <div className='min-h-screen bg-gray-50 p-8 font-sans'>
